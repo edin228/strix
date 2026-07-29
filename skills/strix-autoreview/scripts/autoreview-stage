@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+import argparse
+import json
+import signal
+from pathlib import Path
+
+from autoreview_stage import repo_root, run_stage, validate_lenses
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Run one to three autoreview lenses in parallel.")
+    parser.add_argument("--lens", action="append", required=True)
+    parser.add_argument("--mode", choices=["auto", "local", "uncommitted", "branch", "commit"], default="auto")
+    parser.add_argument("--base")
+    parser.add_argument("--commit", default="HEAD")
+    parser.add_argument("--model")
+    parser.add_argument("--thinking", choices=["low", "medium", "high", "xhigh"])
+    parser.add_argument("--codex-bin")
+    parser.add_argument("--web-search", action="store_true")
+    parser.add_argument("--prompt", action="append", default=[])
+    parser.add_argument("--prompt-file", action="append")
+    parser.add_argument("--dataset", action="append")
+    parser.add_argument("--scope-path", action="append")
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    validate_lenses(args.lens)
+    previous_sigterm = signal.getsignal(signal.SIGTERM)
+
+    def interrupt_stage(_signum: int, _frame: object) -> None:
+        raise KeyboardInterrupt("SIGTERM")
+
+    signal.signal(signal.SIGTERM, interrupt_stage)
+    try:
+        packet, exit_code = run_stage(
+            repo_root(),
+            args,
+            autoreview=Path(__file__).with_name("autoreview"),
+        )
+    finally:
+        signal.signal(signal.SIGTERM, previous_sigterm)
+    print(json.dumps(packet, sort_keys=True, separators=(",", ":")))
+    return exit_code
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

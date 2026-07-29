@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Bug Hunt"
+  short_description: "Find and fix verified product defects"
+  default_prompt: "Use $strix-bug-hunt to investigate this feature for concrete bugs."

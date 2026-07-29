@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Branch Review"
+  short_description: "Review and verify branch changes"
+  default_prompt: "Use $strix-branch-review to review this branch against its intended behavior."

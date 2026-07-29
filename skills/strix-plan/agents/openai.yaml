@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Plan"
+  short_description: "Write source-grounded implementation plans"
+  default_prompt: "Use $strix-plan to create an implementation plan for this project."

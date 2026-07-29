@@ -1,0 +1,35 @@
+{
+  "name": "strix",
+  "version": "0.2.0",
+  "description": "Portable, risk-aware workflows for planning, structured autoreview, implementation loops, and bug hunting.",
+  "author": {
+    "name": "Edin Dedovic"
+  },
+  "license": "MIT",
+  "keywords": [
+    "agent-workflows",
+    "code-review",
+    "implementation-planning",
+    "software-engineering"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Strix",
+    "shortDescription": "Risk-aware software delivery workflows.",
+    "longDescription": "Strix provides source-grounded planning, independent plan review, isolated structured autoreview, checkpoint implementation loops, branch review, and evidence-based bug hunting for software projects.",
+    "developerName": "Edin Dedovic",
+    "category": "Developer Tools",
+    "capabilities": [
+      "Planning",
+      "Review",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Create a source-grounded implementation plan.",
+      "Review this plan for execution readiness.",
+      "Run a structured risk-proportional review of this change.",
+      "Execute this approved plan through the implementation loop.",
+      "Investigate this feature for concrete bugs."
+    ]
+  }
+}

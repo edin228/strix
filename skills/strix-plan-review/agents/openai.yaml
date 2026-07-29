@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Plan Review"
+  short_description: "Audit plans for safe implementation"
+  default_prompt: "Use $strix-plan-review to audit this implementation plan for execution readiness."

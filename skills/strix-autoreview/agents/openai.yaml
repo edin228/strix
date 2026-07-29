@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Autoreview"
+  short_description: "Run isolated structured code reviews"
+  default_prompt: "Use $strix-autoreview to run a risk-proportional structured review of this change."
