@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Publish Pr"
+  short_description: "Publish the exact reviewed branch tip"
+  default_prompt: "Use $strix-publish-pr to publish the exact reviewed branch tip."

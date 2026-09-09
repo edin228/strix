@@ -1,136 +1,71 @@
-# Review Routing and Budgets
+# Review timing and coverage
 
-Classify changed behavior, not the feature name or directory. Project policy
-may require more rigor; a user budget may not lower the minimum.
+Classify the changed behavior using project policy. Low-risk copy, presentation,
+and bounded documentation normally need focused checks and resident inspection.
+Standard-risk behavior needs one combined independent closeout review. High-risk
+behavior needs that review with the applicable safety evidence and source context.
+Safety-policy edits in tooling are classified by their consequences.
 
-## Minimum Routes
+## Timing
 
-| Behavior | Minimum route |
-|---|---|
-| Copy, styling, icons, documentation, local reversible UI | Deterministic validation only |
-| Standard-risk behavior without a dominant specialty | One generalist autoreview |
-| Shared ownership, layer boundary, or plan-directed architecture | Generalist plus `architecture` |
-| Authentication, authorization, privacy, filesystem, shell, or public trust boundary | Generalist plus `security` |
-| Transactions, retries, concurrency, background work, synchronization, or realistic data loss | Generalist plus `data-integrity-reliability` |
-| Schema or data migration | `migrations` plus `data-integrity-reliability` |
-| Narrow query-heavy or realistic hot path | One dominant `performance` specialist |
-| Broad standard-risk behavior with secondary performance concerns | One generalist; use `performance` only when dominant |
-| Frontend API, cache, async state, overlay, or window integration | One dominant `frontend-integration` specialist |
-| Atomic checkpoint crossing trust and state-consistency boundaries | Generalist plus `security` plus `data-integrity-reliability` |
-| Atomic checkpoint crossing architecture, trust, and state consistency | `architecture` plus `security` plus `data-integrity-reliability`; omit a fourth generalist |
+Complete implementation and focused validation before one combined correctness,
+acceptance, and integration review. Do not automatically review each checkpoint,
+launch a separate generic bug hunt, or repeat an unchanged clean review. Use an
+early review only when explicitly requested, project-required, or source proves
+that waiting risks an irreversible action or expensive dependent design mistake.
+Name that concrete reason. Pre-mutation security, migration, and destructive-action
+evidence remains mandatory regardless of review timing.
 
-Split checkpoints that would require more than three initial reviewers unless
-splitting creates an unsafe or untestable intermediate state.
+Independent plan review is separate from plan readiness and approval. Resident
+source verification establishes readiness by default; an independent plan review
+is due when requested, project-required, or justified by the early-review rule.
+A readiness verdict never supplies user approval.
 
-Before launching multiple routes, record one distinct coverage justification
-per lens: the behavior or boundary it owns, changed paths exposing it, and the
-material question not covered by another route.
+## Choose one mechanism
 
-## Reviewer Configuration
+Use one permitted read-only source-capable reviewer for integrated work. Include
+exact root, base and tip or scoped dirty diff, acceptance, relevant callers,
+validation, and prior finding adjudication. The reviewer must not edit, commit,
+launch another reviewer, or perform external actions.
 
-Use a project-approved Codex model when reproducibility matters. When
-`--model` is omitted, the isolated runner uses Codex's service default because
-it deliberately ignores user configuration. Do not hardcode a Strix model
-name.
+When the exact snapshot and available context cover the same objective,
+strix-autoreview, when installed, may supply the independent review instead. Read its operating
+reference before invoking it and obey provider/data policy. Do not run both
+mechanisms for the same job. If the skill or reviewer is unavailable, use an
+approved equivalent; otherwise report independent review incomplete rather than
+claiming resident inspection supplied it.
 
-Use `--thinking high` for high-risk and difficult standard-risk review unless
-the project has validated another setting. If a requested budget conflicts
-with the risk minimum, stop before editing and request direction.
+## Coverage by changed behavior
 
-Initial breadth:
+| Behavior | Questions to cover |
+| --- | --- |
+| Ordinary workflow or API | Intended path, common failures, contract compatibility |
+| Authorization or tenant scope | Supported identities and entry paths, isolation, read and write callers |
+| Transactions, retries, jobs, concurrency | Duplicate execution, ordering, partial success, recovery |
+| Migrations | Representative data, graph compatibility, rollout, recovery |
+| Queries and hot paths | Representative cardinality, amplification, measured constraints |
+| Frontend asynchronous state | Invalidation, stale responses, optimistic rollback, navigation |
+| Shared architecture | Ownership, direct consumers, safe intermediate states |
 
-- low risk: zero reviewers by default;
-- standard risk: one reviewer by default; and
-- high or mixed risk: two reviewers by default, three maximum.
+Use a generalist or dominant specialist, adding a distinct lens only when needed
+for a material unanswered question. The bundled stage supports up to three
+lenses; this is its tool constraint, not a reason to split safe atomic changes
+or cap required safety coverage. Use project-approved reviewer configuration;
+do not hardcode a preferred model into portable workflow policy.
 
-`standard` uses the minimum route. `deep` may add one distinct route up to the
-three-reviewer cap; it does not create redundant reviewers.
+## Repairs and evidence
 
-## Invocation
+Verify each finding's executable trigger, impact, and source owner. Reject
+false positives with source evidence. Recheck the repair, direct interactions,
+and affected deterministic tests. A new or materially changed safety boundary
+requires a focused independent recheck, as does an explicit re-review request.
+Retain unaffected coverage with a reason. Do not relaunch a full review simply
+because a repair or commit changed the SHA.
 
-Resolve the installed `strix-autoreview` skill path.
-
-One route:
-
-```bash
-python3 <strix-autoreview>/scripts/autoreview \
-  --mode local \
-  --scope-path <checkpoint-path> \
-  --thinking high
-```
-
-Multiple routes:
-
-```bash
-python3 <strix-autoreview>/scripts/autoreview-stage \
-  --mode local \
-  --lens generalist \
-  --lens security \
-  --scope-path <checkpoint-path> \
-  --thinking high
-```
-
-Pass every checkpoint-owned file or cohesive directory as a separate literal
-scope. Compare scoped status/diff with checkpoint ownership before launch. An
-empty, incomplete, or unprovable scope blocks review.
-
-Every stage lens receives the same complete scope. Prefer commit or branch mode
-when it isolates the checkpoint more accurately. Never include unrelated dirty
-files for convenience.
-
-## Completion Evidence
-
-Exit `1` with a structured blocking report is completed, not an engine failure.
-Stage exit `2`, missing or malformed output, inaccessible input, interruption,
-unstable fingerprints, or cleanup failure is incomplete.
-
-For each call retain:
-
-- lens, explicit model/reasoning or default status, prompt size, and elapsed
-  time;
-- available token metrics or explicit unavailability;
-- reported and confirmed findings;
-- pass number and reviewed fingerprint; and
-- whether coverage remains valid for the current snapshot.
-
-Do not write a metrics artifact during routine implementation.
-
-## Snapshot Validity and Convergence
-
-A completed lens verdict applies only to its fingerprinted input. A material
-fix invalidates the finding lens and every other lens whose reviewed behavior
-or evidence changed. Preserve genuinely unaffected verdicts only with an
-explicit coverage reason.
-
-Accept a reviewed checkpoint only when deterministic validation passes and
-every required lens has resolved current-snapshot coverage. Coverage resolves
-when a completed report has no P0–P2 finding or the resident session rejects
-every P0–P2 with source evidence.
-
-Reviewer confidence is confidence in the reported verdict, not a cleanliness
-or quality score. Never use a numeric confidence threshold to accept, reject,
-or repeat review.
-
-After the second consecutive blocking result, and after each later result,
-audit convergence. Continue when source confirms a localized in-scope defect,
-deterministic validation can prove the repair, and blockers are narrowing.
-Stop when:
-
-- repeated fixes do not narrow the same trigger;
-- fixes and findings oscillate;
-- correction expands product behavior, scope, ownership, or architecture;
-- reviewer disagreement cannot be resolved from source; or
-- deterministic validation cannot prove the repair.
-
-Do not rerun after required coverage resolves merely to seek higher confidence
-or remove P3 observations.
-
-## Finding Verification
-
-Verify P0–P2 in current source. Require a supported trigger, material impact,
-plan relevance, and proportionate fix. Classify each as confirmed, false
-positive, already fixed, overstated, test-gap-only, needs direction, or
-deferred.
-
-After a confirmed fix, rerun affected validation and invalidated lenses only.
-The resident session performs synthesis; do not launch a synthesis model.
+A verdict applies only to its examined input. Record exact scope, source
+fingerprint, reason, reviewer configuration, findings and adjudication, and
+available usage or its unavailability. Missing source, malformed output,
+interruption, or engine failure is incomplete evidence, never a clean result.
+Stop a nonconverging repair when scope grows, fixes oscillate, or evidence cannot
+resolve the same trigger. Do not repeat calls for confidence or to remove minor
+nonblocking observations.

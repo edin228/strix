@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Trim Complexity"
+  short_description: "Find behavior-preserving simplifications"
+  default_prompt: "Use $strix-trim-complexity to find behavior-preserving simplifications."

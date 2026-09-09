@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Create Verifier"
+  short_description: "Create a source-grounded application verifier"
+  default_prompt: "Use $strix-create-verifier to create a source-grounded application verifier."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Ui"
+  short_description: "Improve interfaces using project conventions"
+  default_prompt: "Use $strix-ui to improve interfaces using project conventions."

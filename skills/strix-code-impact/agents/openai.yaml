@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Code Impact"
+  short_description: "Trace routes, callers, consumers, and tests"
+  default_prompt: "Use $strix-code-impact to trace routes, callers, consumers, and tests."

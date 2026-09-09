@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Sentry Triage"
+  short_description: "Triage Sentry errors against current source"
+  default_prompt: "Use $strix-sentry-triage to triage Sentry errors against current source."

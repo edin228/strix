@@ -1,174 +1,101 @@
 ---
 name: strix-implement
-description: Execute an explicitly approved software implementation plan through dependency-ordered, repository-owned checkpoints with deterministic validation, risk-routed Strix Autoreview, verified fixes, snapshot-valid review coverage, safe acceptance boundaries, optional checkpoint commits, and final closeout. Use when a user asks to implement or continue an approved plan through the Strix implementation loop. Do not use for discovery, plan authoring, plan approval, or materially unresolved plans.
+description: Execute an approved software plan through repository-owned checkpoints with focused validation and one combined closeout review. Use for implementing or continuing an approved plan, not discovery or unresolved product decisions.
 ---
 
-# Strix Implement
+# Strix implement
 
-Execute the approved plan without reopening resolved discovery. The resident
-session implements and verifies findings. Autoreview subprocesses are
-ephemeral, read-only advisers.
-
-## Entry
-
-Resolve:
-
-- approved plan path;
-- `Review budget: standard|deep`;
-- `Commits: accepted-checkpoints|no-commit`;
-- existing checkout or explicitly authorized isolation; and
-- optional `Stop after: <checkpoint or delivery slice>`.
-
-Default to `Review budget: standard`, the existing safe checkout, and
-`Commits: no-commit` unless the user or project instructions explicitly
-authorize accepted-checkpoint commits.
-
-Read `references/entry-and-state.md` completely during preflight,
-`references/validation-ledger.md` while extracting checks, and
-`references/review-routing.md` before classifying the first checkpoint and
-whenever risk changes materially.
+The resident owns sequencing, acceptance, finding adjudication, and authority.
+Use the existing safe checkout unless isolation is requested or project-required.
+Default to no commits unless the user or project authorizes checkpoint commits.
+Honor an explicit stop-after checkpoint or delivery-slice boundary.
 
 ## Preflight
 
-Before editing:
+Read the complete approved plan, root and applicable nested instructions, and
+[entry-and-state.md](references/entry-and-state.md). Record the exact plan hash,
+approval evidence, repository roots, branches, bases, HEADs, initial dirty paths,
+commit mode, dependencies, and stop boundary. Approval may come from an active
+resolved delivery request when project policy permits; a review verdict alone
+is never approval. Require a plan-only seal only when project policy does.
 
-1. Read the complete plan and verify explicit user approval.
-2. Read root and target-repository `AGENTS.md` files plus relevant references.
-3. Resolve every repository, branch, base, worktree state, checkpoint,
-   dependency, validation, risk, acceptance criterion, and commit mode.
-4. Build the plan-derived validation ledger.
-5. Verify current source supports named ownership and assumptions.
-6. Record the session fingerprint defined by the entry reference.
-7. Stop before editing on any entry blocker named there.
+Verify named source owners, infrastructure, callers, acceptance, and failure
+paths before coding. Resolve material product, architecture, safety, and rollout
+choices first. Build the plan-derived checks using
+[validation-ledger.md](references/validation-ledger.md). Read
+[review-routing.md](references/review-routing.md) for review timing and coverage.
+Every checkpoint owns exactly one Git repository, even across a multi-repository
+plan. Subtrees in one repository may share a cohesive checkpoint.
 
-For multi-repository plans, build the dependency map first. Every checkpoint
-must own exactly one Git repository. Dependencies may cross repositories;
-checkpoints and commits may not.
+## Checkpoint loop
 
-## Checkpoint Loop
+For each dependency-ready checkpoint:
 
-For each ready checkpoint in dependency order:
+1. Confirm its repository, branch, current HEAD, owned paths, dependencies,
+   acceptance, and due validation. Preserve unrelated changes.
+2. Implement the bounded outcome following current owners and patterns.
+3. Inspect the complete diff and run focused deterministic checks and any due
+   slice integration gate. Fix confirmed in-scope defects and recheck affected
+   behavior. Do not invent tests that merely mirror implementation wording.
+4. Defer independent review to closeout unless requested or a concrete
+   pre-mutation safety or expensive dependent-design risk requires it earlier.
+   Record deferred review honestly; do not claim a checkpoint was reviewed.
+5. Inspect final status and accepted bytes. In authorized commit mode stage
+   only owned paths and use project hooks. Inspect what the hook and commit
+   changed, rerunning invalidated checks before acceptance. In no-commit mode
+   retain scoped diff evidence without staging.
+6. Record acceptance, commands and outcomes, source identity, and next work.
 
-1. Restate its outcome, parent slice, dependencies, expected paths, owning
-   repository, acceptance criteria, due validation, dominant risk, and review
-   route.
-2. Read important existing patterns named by the plan.
-3. Enter the owning repository and verify branch, base, HEAD lineage, and
-   preserved unrelated status.
-4. Implement only the checkpoint and explicit dependencies.
-5. Run every validation-ledger entry due now. Fix failures before autoreview.
-6. Route the validated checkpoint through `strix-autoreview`. Low-risk work
-   normally launches no reviewer.
-7. Inspect every P0–P2 finding in current source. Classify it and fix only
-   confirmed, localized, in-scope defects.
-8. After each material fix, rerun affected deterministic checks, invalidate
-   every lens whose evidence changed, and rerun only required or invalidated
-   lenses.
-9. Before accepting the last checkpoint in a delivery slice, run that slice's
-   integration gate. Do not add a redundant review unless risk routing
-   requires it.
-10. Inspect the final diff and status. Stage only checkpoint-owned paths when
-    commits are authorized.
-11. Record checkpoint acceptance evidence. Commit with the project's
-    convention in accepted-checkpoint mode; otherwise retain scoped-diff and
-    validation/review evidence without staging.
+When delegation is available and authorized, use it only for bounded work while
+useful independent resident work remains. Keep consequential diagnosis and
+architecture decisions resident. Allow at most one writable actor per checkout.
+Validate owned paths against symlinks and nested repositories before granting
+write scope. A worker may not stage, commit, perform lifecycle actions, or spawn
+more workers. Inspect its actual diff and repository state before acceptance;
+a worker summary is not proof. Do not choose a fixed model for every project.
 
-Do not accept a checkpoint after a material fix until deterministic validation
-passes on the current snapshot and every required lens has resolved coverage
-valid for that snapshot. Coverage resolves when a completed report is clean or
-every P0–P2 finding has been rejected with source evidence.
+Preserve accepted work when a checkpoint fails. Quarantine its unaccepted diff
+and block dependents; continue independent work in unaffected repositories when
+safe. Never reset, stash, discard, or overwrite unrelated or failed work to
+continue. Resolve uncertain writer ownership before another mutation.
 
-Review counts are telemetry, not acceptance limits. After repeated blocking
-passes, audit convergence. Continue while confirmed, localized fixes
-materially narrow the blocker. Stop when behavior oscillates, fixes cease to
-narrow the supported trigger, scope or architecture expands, evidence cannot
-be reconciled, or new authority is required. Do not loop for empty P3 output or
-higher reviewer confidence.
+## Combined closeout
 
-## Failure Isolation
+At the agreed delivery boundary, finish required deterministic and integration
+checks. Review each complete repository diff and cross-repository contracts
+against the approved acceptance criteria. Use strix-branch-review when installed
+or an equivalent source-grounded review. Choose one independent mechanism for
+the combined job; do not add checkpoint autoreview or a separate generic hunt.
+A complete earlier review may be retained when its inputs still apply.
 
-Preserve accepted commits. When a checkpoint fails:
+Verify every reported defect against current source. Repair localized in-scope
+findings, rerun affected checks, and inspect direct interactions. Recheck a
+materially changed safety boundary independently. Do not restart the whole
+review after each edit or seek a numeric confidence threshold. Stop when fixes
+oscillate, evidence cannot settle a disagreement, or scope materially expands.
 
-- mark it and transitive dependents blocked;
-- preserve its unaccepted diff;
-- quarantine that repository from later checkpoints that could mix with the
-  failed diff; and
-- continue independent ready checkpoints in unaffected repositories when they
-  remain within the requested boundary.
+After repairs settle, assess browser evidence from changed behavior. Use the
+project verifier or strix-verify-web when installed for required rendered or
+interaction proof. Record not-required with source and deterministic evidence
+when appropriate; a PR or new SHA alone does not require another live drive.
+Retain valid artifacts and repeat only invalidated scenarios. A full verifier
+audit needs an explicit request or source-proven broad map drift.
 
-Never reset, overwrite, stash, or discard user or failed-checkpoint work merely
-to continue.
+Confirm every acceptance criterion, final status, preserved work, and remaining
+limitations. Report commits when authorized, validation, reviewed scope and
+method, confirmed findings, retained evidence, and incomplete lanes. Reflect
+once at the outermost requested delivery boundary, using strix-retrospective
+when installed. Defer that reflection to an active publication or shipping owner.
 
-## Continuation and Termination
+## Continuation and authority
 
-Progress updates, tool completion, context pressure, elapsed time, and token
-use are not completion conditions. Keep the compact continuation capsule from
-the entry reference current and resume the next ready checkpoint.
+Keep the continuation capsule current and resume after compaction. Do not replay
+accepted checkpoints or reread unchanged instructions still in context. Finish
+when the plan or requested stop boundary is accepted, the user ends or replaces
+the task, or a verified blocker leaves no safe independent work. Context size,
+elapsed effort, and tool completion are not completion conditions.
 
-Immediately before a final response:
-
-1. Enumerate every unaccepted checkpoint and any in-progress or ready work.
-2. Record exactly one permitted termination reason:
-   - the approved plan is complete;
-   - the requested stop boundary is accepted;
-   - user steering replaced or ended the task; or
-   - a verified blocker needs user authority or an external change and no
-     independent ready checkpoint remains.
-3. If work remains ready and no reason applies, execute it instead of ending.
-
-## Finding Synthesis
-
-For each blocking report:
-
-- verify the supported trigger, material impact, and cited ownership;
-- classify it as confirmed, false positive, already fixed, overstated,
-  test-gap-only, needs direction, or deferred;
-- deduplicate semantic overlap without discarding conflicting lens evidence;
-  and
-- preserve the highest severity supported by source, not the highest reported
-  severity.
-
-Do not launch a separate synthesis model. The resident session owns synthesis.
-
-## Steering and Authority
-
-Follow new user steering immediately. Preserve accepted checkpoint commits and
-re-evaluate the current checkpoint. Continue only when steering remains
-compatible with the approved plan.
-
-Choose local implementation details, deterministic checks, supported review
-routes, and the smallest verified fix. Stop for unresolved product behavior,
-scope expansion, material architecture change, destructive behavior,
-production access, invalidated plan assumptions, or overlapping work that
-cannot be preserved.
-
-Do not amend, push, open or merge a change request, deploy, delete branches,
-remove worktrees, rewrite history, or access production unless separately
-authorized.
-
-## Partial Stop
-
-When `Stop after` ends before the plan:
-
-1. Complete and accept only the named boundary.
-2. Run a delivery-slice gate only when the boundary finishes that slice.
-3. Do not run full-plan validation or report later checkpoints as defects.
-4. Return the stop and continuation state from the entry reference.
-
-## Final Closeout
-
-After the entire plan:
-
-1. Run repository-required final checks and every cross-repository integration
-   gate.
-2. Review each complete repository diff against the approved plan using
-   `strix-branch-review`, then cross-check all repository diffs together for
-   dependency and contract coverage.
-3. Verify final findings. Reopen only the affected checkpoint for a localized
-   fix, then rerun invalidated validation and review coverage.
-4. Confirm plan coverage, repository states, branches, bases, accepted
-   checkpoints, and absence of unauthorized external actions.
-
-Report validations, review routes and findings, reviewer usage and elapsed
-metrics, commits when authorized, residual advisories, snapshot limitations,
-and the evidenced termination reason.
+Material plan changes need renewed readiness and approval binding before their
+implementation. Preserve existing authority for unchanged scope. Local execution
+does not authorize push, PR mutation, merge, production, branch deletion,
+history rewriting, or destructive cleanup.

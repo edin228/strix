@@ -91,3 +91,36 @@ project should state:
 
 Strix rejects common credential paths and disables web search by default, but
 these controls do not replace the project's data-classification policy.
+
+## Delivery and review policy
+
+Resolved low-risk work can use a short scope and acceptance note. Standard and
+high-risk work needs source-verified planning. State any stricter independent
+plan review, separate approval, plan seal, and commit requirements. Otherwise
+an active explicit delivery request may approve the exact in-scope plan, while
+a plan-only request never authorizes implementation.
+
+Use focused checks during implementation and one combined closeout review.
+An early review needs a requested or concrete pre-mutation safety or dependent
+design reason. Repairs receive affected checks and focused rechecks, not an
+automatic new delivery cycle. Reviewer availability does not waive safety proof.
+
+## Optional runtime and lifecycle contracts
+
+Projects using worktrees or live verification should name creation and removal
+procedures, resource identities, readiness checks, fixture policy, credential
+sources, browser ownership, and evidence storage. Source-only work does not
+inherit application startup or database requirements. Report unavailable live
+proof and permitted explicit waivers without claiming success.
+
+Projects using publication, merge, or releases should name the protected route,
+required checks, evidence freshness, candidate identity, migration compatibility,
+and recovery procedure. Trusted automation must not take approval from candidate
+code. A timeout after a write requires state reconciliation before any retry.
+Do not invent a controller, queue, receipt schema, or deployment command where
+the project has none. Missing safety-critical authority blocks its dependent
+action, not independent preparation.
+
+Sentry triage needs an available approved integration and explicit scan scope.
+OKLCH work uses the project's contrast standard, browser targets, and theme
+conventions. Neither adapter is required for core delivery.

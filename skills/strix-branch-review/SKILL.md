@@ -1,6 +1,6 @@
 ---
 name: strix-branch-review
-description: Review, verify, and when explicitly requested repair Git branch or working-tree changes with rigor proportional to behavior risk. Use for current-branch reviews, named branch or commit-range audits, plan-compliance checks, pasted review findings, requested ratings, or review-and-fix loops. Default to review-only unless the user clearly authorizes fixes.
+description: Review, verify, and when explicitly requested repair Git branch or working-tree changes with rigor proportional to behavior risk. Use for current-branch reviews, named branch or commit-range audits, plan-compliance checks, pasted review findings, requested ratings, or review-and-fix loops. Combined bug-hunt-and-branch-review requests authorize localized repairs unless explicitly read-only; ordinary reviews remain read-only.
 ---
 
 # Strix Branch Review
@@ -13,9 +13,14 @@ refactor.
 
 Choose one mode:
 
-- `review-only`: inspect and report; default;
+- `review-only`: inspect and report; default for an ordinary review;
 - `fix-findings`: verify supplied findings and fix confirmed defects; or
 - `review-and-fix`: perform a review, then repair confirmed in-scope defects.
+
+A combined request for a bug hunt and branch review selects one resident
+review-and-fix pass unless the user explicitly says read-only, findings-only,
+or no edits. This authorizes localized repairs and necessary validation, not
+external actions. Commit only when the user or project permits it.
 
 Resolve the owning Git repository, target branch or working tree, comparison
 base, intended behavior, applicable plan, and whether local edits already
@@ -91,17 +96,19 @@ Run focused validation after each material fix, then all repository-required
 checks for the final changed state. Re-review affected code and invalidate
 prior review evidence when the snapshot materially changes.
 
-After a high-risk fix or non-trivial standard-risk behavior fix, use
-`strix-autoreview` from the owning repository unless project policy requires a
-different closeout. Skip it for low-risk presentation-only fixes unless the
-user asks or a broadly shared surface raises practical risk. Verify every
-blocking report in current source. If a confirmed finding causes a material
-fix, rerun affected deterministic validation and invalidated review coverage.
+For a combined delivery closeout, cover correctness, acceptance, defects, and
+integration in one pass. Low-risk work normally needs resident inspection.
+For standard and high risk, use one permitted independent source-capable reviewer
+or strix-autoreview when its exact snapshot and context suffice, following the
+project's review policy. If neither is available, report that evidence gap.
+Do not add both for the same objective or recursively invoke branch review.
+For an explicitly read-only reviewer assignment, return findings without
+launching another reviewer or changing files.
 
-Do not run autoreview for review-only work that changed no files unless the
-user explicitly asks for that independent review. Do not recursively invoke
-`strix-branch-review`. Treat an interrupted, malformed, unstable, or
-engine-failed autoreview as incomplete, not clean.
+After a repair, inspect its direct interactions and rerun affected checks.
+Require focused independent recheck for a materially changed safety boundary
+or explicit re-review request. Retain unaffected evidence; do not restart a
+full review for each fix. Incomplete or engine-failed review is not clean.
 
 Do not commit, amend, push, merge, deploy, delete branches, or rewrite history
 unless separately authorized.

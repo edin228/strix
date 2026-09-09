@@ -58,8 +58,11 @@ risk-cohesive execution checkpoints. Every checkpoint must name:
 - a safe review and commit boundary.
 
 Separate repositories into dependency-ordered checkpoints and commits.
-Require independent plan review and explicit user approval before executing a
-large or materially risky plan.
+Require source-verified readiness before executing a plan. State whether an
+explicit request to deliver a resolved outcome also approves its in-scope plan
+or whether separate approval is needed. Independent plan review is due when
+requested or before a concrete irreversible action or expensive dependent
+design decision; projects may require it more broadly.
 
 ## Validation
 
@@ -85,13 +88,32 @@ Web search is disabled by default. Document when it may be enabled for current
 public dependency contracts. Keep credentials, personal data, customer data,
 and unnecessary proprietary material out of review inputs.
 
-Use `strix-autoreview` after deterministic validation for high-risk changes
-and non-trivial standard-risk behavior. Treat its findings as advisory:
-verify P0–P2 in current source and rerun invalidated checks and lenses after a
-material fix.
+Complete implementation and focused checks, then use one combined independent
+review for standard and high-risk behavior. Use a source-capable reviewer or
+`strix-autoreview` when its exact scope suffices. Verify findings in source.
+Recheck affected behavior after repairs and independently recheck materially
+changed safety boundaries. Do not schedule automatic checkpoint autoreview.
+Low-risk work normally needs focused checks and resident inspection.
 
 ## Operations
 
 State the rules for production access, deployments, databases, migrations,
 background workers, external providers, and destructive cleanup. Explicit
 user authorization should be required for production or irreversible actions.
+
+## Runtime and verification
+
+Name runtime, port, credential, fixture, browser, and cleanup owners where used.
+Assess live proof from changed behavior. Keep not-required decisions and waivers
+distinct from passing scenarios. Isolated instruction changes need focused owner
+checks; a full verification-map audit is due only when requested or broad drift
+is proved. Preserve still-valid source and runtime evidence.
+
+## Workflow routing
+
+Use `strix-deliver` for local delivery and `strix-fix-to-pr` for an explicitly
+requested bounded repair through PR creation. PR-only requests use
+`strix-publish-pr`; shipping uses `strix-ship`. Production release and terminal
+worktree cleanup require separate explicit authority. Do not infer issue
+mutation from any of those requests. Reflect once at the outermost completed
+boundary with `strix-retrospective`; proposals do not authorize further edits.

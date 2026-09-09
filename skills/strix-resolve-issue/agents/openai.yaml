@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Resolve Issue"
+  short_description: "Resolve a named defect or exact issue bundle"
+  default_prompt: "Use $strix-resolve-issue to resolve a named defect or exact issue bundle."

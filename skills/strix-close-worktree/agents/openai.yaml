@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Close Worktree"
+  short_description: "Integrate and retire a feature workspace"
+  default_prompt: "Use $strix-close-worktree to integrate and retire a feature workspace."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Ship"
+  short_description: "Ship reviewed changes through protected merge"
+  default_prompt: "Use $strix-ship to ship reviewed changes through protected merge."

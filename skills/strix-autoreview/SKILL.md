@@ -1,6 +1,6 @@
 ---
 name: strix-autoreview
-description: Run isolated, structured, risk-proportional AI code reviews for local changes, branch diffs, commits, or checkpoint-scoped paths. Use for advisory closeout reviews, focused architecture/security/reliability/migration/performance/frontend-integration review, or bounded multi-lens review after deterministic validation. Do not use as a replacement for tests, source inspection, or human verification of findings.
+description: Run isolated, structured, risk-proportional AI code reviews for local changes, branch diffs, commits, or checkpoint-scoped paths. Use for advisory closeout reviews, focused architecture/security/reliability/migration/performance/frontend-integration review, or a justified early review after deterministic validation. Do not invoke automatically at every implementation checkpoint. Do not use as a replacement for tests, source inspection, or human verification of findings.
 ---
 
 # Strix Autoreview
@@ -34,8 +34,10 @@ provenance.
 6. Reject speculative hardening, style preferences, hypothetical failure
    modes, and broad rewrites.
 7. Treat P3 as nonblocking and do not fix it merely to empty the report.
-8. After a confirmed material fix, rerun affected deterministic validation and
-   review coverage.
+8. After a confirmed fix, rerun affected deterministic checks and inspect its
+   direct interactions. Independently recheck materially changed safety
+   boundaries or an explicit re-review request; retain unaffected evidence.
+   Do not repeat a whole review merely because a repair changed the tip.
 
 Do not push, merge, deploy, or mutate Git merely to obtain a review.
 

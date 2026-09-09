@@ -4,56 +4,75 @@ Strix is a portable set of risk-aware workflows for software agents. It turns
 good engineering habits into repeatable skills without assuming a particular
 language, framework, repository layout, or deployment platform.
 
-The initial release includes:
+The collection contains 24 independently installable skills. Core workflows
+read repository instructions for commands, branch policy, runtime ownership,
+and authorization. The Sentry and OKLCH skills are optional adapters.
 
-- `strix-plan`: write source-grounded implementation plans;
-- `strix-plan-review`: independently audit plans for execution readiness;
-- `strix-autoreview`: run isolated structured reviews over local, branch,
-  commit, or checkpoint-scoped changes;
-- `strix-implement`: execute approved plans through a validation,
-  autoreview, verified-fix, and acceptance loop;
-- `strix-branch-review`: review or repair branch changes; and
-- `strix-bug-hunt`: investigate concrete defects and optionally repair them.
+## Workflows
 
-## How the Workflows Fit Together
-
-The main delivery path is:
+For a resolved change, use `strix-deliver`. Bounded low-risk work uses a short
+scope and acceptance note. Larger or riskier work uses a source-verified plan
+and `strix-implement`, with focused checks during implementation and one
+combined review at closeout. Independent plan review is available on request,
+when project-required, or before a concrete irreversible or costly design risk.
+Readiness and user approval remain separate.
 
 ```text
-requirements
-  → strix-plan
-  → strix-plan-review
-  → explicit user approval
-  → strix-implement
-      → deterministic validation
-      → strix-autoreview
-      → verify and fix confirmed findings
-      → accept the current checkpoint
-  → strix-branch-review
+resolved request → source verification and proportionate planning
+                 → authorized implementation + focused checks
+                 → combined closeout review + verified repairs
+                 → required live proof → local result
+
+explicit PR request → publication
+explicit ship request → publication when needed + protected merge
+explicit release request → production preflight + authorized dispatch
+explicit retirement request → disposition proof + authorized cleanup
 ```
 
-Each skill can also be used independently:
+Each skill also works independently. When copying a subset, install companions
+you want to use or follow the project's equivalent procedure. The skills name
+fallbacks rather than requiring unavailable private helpers.
 
-| Skill | What it does | Typical result |
-|---|---|---|
-| `strix-plan` | Turns resolved requirements into source-grounded, dependency-ordered delivery slices and repository-owned checkpoints | An implementation plan with paths, tests, risks, and acceptance criteria |
-| `strix-plan-review` | Audits a plan independently before coding | An approval verdict or a precise repair list |
-| `strix-implement` | Executes an approved plan checkpoint by checkpoint | Validated changes, optional authorized commits, and resumable checkpoint evidence |
-| `strix-autoreview` | Runs an isolated, structured AI review over local, branch, commit, or scoped changes | Verified P0–P3 candidates, a completion state, and usage evidence |
-| `strix-branch-review` | Reviews an entire working tree, branch, commit range, or supplied findings | Severity-ranked findings and, when authorized, focused repairs |
-| `strix-bug-hunt` | Traces a feature for concrete correctness, security, state, and reliability failures | Reproduced bugs and, when authorized, regression-tested fixes |
+| Skill | Purpose |
+| --- | --- |
+| [`strix-autoreview`](skills/strix-autoreview/SKILL.md) | Run isolated structured code reviews |
+| [`strix-branch-review`](skills/strix-branch-review/SKILL.md) | Review and verify branch changes |
+| [`strix-bug-hunt`](skills/strix-bug-hunt/SKILL.md) | Find and fix verified product defects |
+| [`strix-close-worktree`](skills/strix-close-worktree/SKILL.md) | Integrate and retire a feature workspace |
+| [`strix-code-impact`](skills/strix-code-impact/SKILL.md) | Trace routes, callers, consumers, and tests |
+| [`strix-create-verifier`](skills/strix-create-verifier/SKILL.md) | Create a source-grounded application verifier |
+| [`strix-deliver`](skills/strix-deliver/SKILL.md) | Deliver a change through local completion |
+| [`strix-fix-to-pr`](skills/strix-fix-to-pr/SKILL.md) | Take a bounded correction through its PR |
+| [`strix-implement`](skills/strix-implement/SKILL.md) | Implement checkpoints and review at closeout |
+| [`strix-maintain-verifier`](skills/strix-maintain-verifier/SKILL.md) | Audit verification maps against source and runtime |
+| [`strix-oklch`](skills/strix-oklch/SKILL.md) | Evaluate OKLCH colors, contrast, and gamut |
+| [`strix-plan`](skills/strix-plan/SKILL.md) | Write source-grounded implementation plans |
+| [`strix-plan-review`](skills/strix-plan-review/SKILL.md) | Audit plans for safe implementation |
+| [`strix-publish-pr`](skills/strix-publish-pr/SKILL.md) | Publish the exact reviewed branch tip |
+| [`strix-release`](skills/strix-release/SKILL.md) | Release an exact approved production candidate |
+| [`strix-resolve-issue`](skills/strix-resolve-issue/SKILL.md) | Resolve a named defect or exact issue bundle |
+| [`strix-retrospective`](skills/strix-retrospective/SKILL.md) | Reflect on completed work using session evidence |
+| [`strix-sentry-triage`](skills/strix-sentry-triage/SKILL.md) | Triage Sentry errors against current source |
+| [`strix-ship`](skills/strix-ship/SKILL.md) | Ship reviewed changes through protected merge |
+| [`strix-trim-complexity`](skills/strix-trim-complexity/SKILL.md) | Find behavior-preserving simplifications |
+| [`strix-ui`](skills/strix-ui/SKILL.md) | Improve interfaces using project conventions |
+| [`strix-unslop`](skills/strix-unslop/SKILL.md) | Edit writing for plain and natural language |
+| [`strix-verify-web`](skills/strix-verify-web/SKILL.md) | Verify web behavior with focused live evidence |
+| [`strix-worktree`](skills/strix-worktree/SKILL.md) | Operate isolated development worktrees |
 
-The implementation loop treats deterministic tests as authoritative and AI
-review as advisory. A reviewer finding is never accepted blindly: the resident
-agent must verify its trigger and impact in current source before making a
-change.
+An ordinary review or investigation is read-only by default. A combined
+"bug hunt and branch review" requests one localized review-and-repair pass
+unless explicitly read-only. Local commits follow user and project authority.
+AI findings require source verification; deterministic checks remain authoritative.
+See [the port coverage](docs/port-coverage.md) for retained boundaries and
+[adoption examples](docs/adoption-examples.md) for choosing a subset.
 
 ## Design
 
 Strix separates two kinds of knowledge:
 
 1. **Workflow invariants** live in the skills: source grounding, approval
-   gates, checkpoint ownership, risk-proportional validation, finding
+   boundaries, checkpoint ownership, risk-proportional validation, finding
    verification, and Git safety.
 2. **Project authority** lives in the adopting project: repository roots,
    branches, test commands, architecture rules, production boundaries, and
@@ -93,8 +112,9 @@ If our agent runtime is not Codex CLI, adapt only the review-engine boundary
 and preserve the structured output schema, read-only execution, failure
 semantics, and tests.
 
-Show me the proposed project-specific replacements and any unresolved safety
-decisions before enabling implementation-loop commits or external review.
+Apply safe project-specific replacements. Ask only about unresolved safety
+decisions or authority not supplied by this request before dependent actions.
+Do not enable implementation commits or external review without that authority.
 Validate the installed skills and run the autoreview unit tests and a safe
 dry run before reporting completion.
 ```

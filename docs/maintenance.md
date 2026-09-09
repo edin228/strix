@@ -49,3 +49,22 @@ different projects and its project contract can express the source project
 without weaker rules. At that point the source project can consume released
 Strix skills and retain a thin adapter for repository topology, validation,
 domain conventions, runtime, and production operations.
+
+## Current portable expansion
+
+The 2026-09-09 port expands the collection to 24 skills and replaces automatic
+checkpoint review with focused validation and one combined closeout review.
+See [port coverage](port-coverage.md) for capability mapping and exclusions,
+and [adoption examples](adoption-examples.md) for project-neutral use cases.
+The existing autoreview engine is retained; this port changes workflow policy,
+not its CLI, isolation, schemas, or provider integration.
+
+Run every skill validator, the plugin validator, and the existing autoreview
+unit suite. Check relative links, companion names, metadata, private terms,
+and the complete diff. The public project examples may contain explicit
+technology commands; core skills must discover those from project policy.
+
+The old routing-policy prose assertions were removed with their superseded
+checkpoint-budget policy. Executable runner, lens loading, snapshot isolation,
+stage-limit, schema, and usage checks remain in the unit suite. Validate workflow
+decisions through scenario review rather than matching replacement sentences.

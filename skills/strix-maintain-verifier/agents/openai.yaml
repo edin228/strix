@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Maintain Verifier"
+  short_description: "Audit verification maps against source and runtime"
+  default_prompt: "Use $strix-maintain-verifier to audit verification maps against source and runtime."
