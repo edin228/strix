@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Fix To Pr"
+  short_description: "Take a bounded correction through its PR"
+  default_prompt: "Use $strix-fix-to-pr to take a bounded correction through its PR."

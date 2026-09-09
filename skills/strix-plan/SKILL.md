@@ -5,8 +5,10 @@ description: Write or refine source-grounded software implementation plans after
 
 # Strix Plan
 
-Create an executable draft while preserving separate plan review, user
-approval, and implementation gates.
+Create an executable draft while distinguishing source-verified readiness,
+user approval, and implementation. Independent plan review is due when requested,
+project-required, or justified by an irreversible action or expensive dependent
+design risk; it is not an automatic extra stage.
 
 ## Establish the Contract
 
@@ -96,14 +98,14 @@ Before writing the final draft, verify:
 - cross-repository work does not imply a multi-repository commit; and
 - no material product or architecture choice was deferred to implementation.
 
-Mark the plan as a draft awaiting independent review and explicit user
-approval.
+Mark source readiness, any due independent review, and approval status
+separately. Plan authorship alone does not authorize implementation.
 
 ## Hand Off
 
 Report the plan path, source areas and project rules used, unresolved
 non-material questions, and freshness limits. Recommend `strix-plan-review`
-before approval.
+when requested, project-required, or justified by a concrete early-review risk.
 
 Do not approve the plan, begin implementation, commit, push, merge, deploy, or
 edit product source.

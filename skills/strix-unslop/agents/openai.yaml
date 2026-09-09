@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Unslop"
+  short_description: "Edit writing for plain and natural language"
+  default_prompt: "Use $strix-unslop to edit writing for plain and natural language."

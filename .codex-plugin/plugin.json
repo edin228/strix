@@ -1,7 +1,7 @@
 {
   "name": "strix",
   "version": "0.2.0",
-  "description": "Portable, risk-aware workflows for planning, structured autoreview, implementation loops, and bug hunting.",
+  "description": "Portable workflows for delivery, planning, review, verification, PRs, worktrees, and releases.",
   "author": {
     "name": "Edin Dedovic"
   },
@@ -16,7 +16,7 @@
   "interface": {
     "displayName": "Strix",
     "shortDescription": "Risk-aware software delivery workflows.",
-    "longDescription": "Strix provides source-grounded planning, independent plan review, isolated structured autoreview, checkpoint implementation loops, branch review, and evidence-based bug hunting for software projects.",
+    "longDescription": "Strix provides 24 project-neutral skills for source-grounded planning, implementation, review, debugging, UI verification, pull requests, protected merging, worktree lifecycle, and production releases, with optional Sentry and OKLCH adapters.",
     "developerName": "Edin Dedovic",
     "category": "Developer Tools",
     "capabilities": [

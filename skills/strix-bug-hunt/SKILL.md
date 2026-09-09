@@ -17,6 +17,11 @@ Use:
 - `investigate-and-fix`: repair verified in-scope defects when the user also
   asks to fix, correct, resolve, or implement repairs.
 
+A combined bug-hunt-and-branch-review request selects one resident repair pass
+unless explicitly read-only. It does not require two overlapping reviews or
+grant publication authority. Standalone investigation remains read-only unless
+repairs are authorized by the user or project policy.
+
 Read root and repo-local `AGENTS.md` files, relevant architecture references,
 and current repository status before inspecting the feature.
 
@@ -77,17 +82,18 @@ In `investigate-and-fix` mode:
 - add regression coverage for each repaired behavior when practical; and
 - keep refactors limited to what correctness requires.
 
-After fixes, run focused tests and every project-required static or integration
-check for changed repositories. Review the final diff for regressions. Use
-`strix-autoreview` after high-risk or non-trivial standard-risk fixes, routed
-to the dominant changed behavior. Treat its output as advisory and verify
-every blocking report in current source.
+After fixes, run focused tests and project-required checks. Perform one
+combined closeout review of repaired behavior and direct interactions. For
+standard or high risk use a permitted independent source-capable reviewer or
+strix-autoreview when its exact scope suffices, not both for the same objective.
+Low-risk work normally needs resident inspection. Report missing independent
+review as incomplete when required.
 
-If autoreview causes a material fix, rerun affected deterministic validation
-and invalidated review coverage. Treat an interrupted, malformed, unstable, or
-engine-failed autoreview as incomplete, not clean. Skip autoreview for
-low-risk presentation-only fixes unless the user asks or a shared surface
-raises practical risk.
+Verify every returned finding in source. After a repair rerun affected checks;
+a materially changed safety boundary needs a focused independent recheck.
+Do not restart a full hunt or review merely because a fix changed bytes.
+Keep investigation-only work read-only and do not launch additional reviewers
+unless explicitly requested or required by project policy.
 
 Do not commit, push, merge, deploy, access production, or perform destructive
 cleanup without separate authority.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Release"
+  short_description: "Release an exact approved production candidate"
+  default_prompt: "Use $strix-release to release an exact approved production candidate."

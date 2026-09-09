@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Worktree"
+  short_description: "Operate isolated development worktrees"
+  default_prompt: "Use $strix-worktree to operate isolated development worktrees."

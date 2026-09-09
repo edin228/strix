@@ -1,4 +1,4 @@
 interface:
   display_name: "Strix Implement"
-  short_description: "Execute approved plans checkpoint by checkpoint"
-  default_prompt: "Use $strix-implement to execute this approved implementation plan."
+  short_description: "Implement checkpoints and review at closeout"
+  default_prompt: "Use $strix-implement to execute this approved plan and review the finished delivery."

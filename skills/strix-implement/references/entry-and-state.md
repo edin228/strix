@@ -4,8 +4,9 @@
 
 Begin only when:
 
-- the user identifies a complete implementation plan;
-- the user explicitly approves it for implementation;
+- a complete implementation plan is identified;
+- the user approves implementation, directly or through a still-applicable
+  resolved delivery request when project policy permits;
 - delivery slices and checkpoints have acceptance criteria, dependencies,
   validation, material edge cases, and safe repository-owned boundaries;
 - material product and architecture decisions are resolved;
@@ -22,8 +23,6 @@ Stop before editing when:
 - a required base or branch cannot be established safely;
 - current source materially invalidates the plan;
 - overlapping local work cannot be separated;
-- risk minimums conflict with an explicit review budget;
-- a required reviewer route is unavailable;
 - required credentials, services, or external inputs are unavailable and no
   independent checkpoint can proceed; or
 - the plan requires unauthorized destruction, production access, deployment,
@@ -35,7 +34,7 @@ Record:
 
 - plan path and SHA-256;
 - user approval evidence;
-- review budget, commit mode, checkout mode, and stop boundary;
+- commit mode, checkout mode, and stop boundary;
 - repository roots, branches, bases, integration targets, initial HEADs, and
   pre-existing staged, unstaged, and untracked paths;
 - ordered slices and checkpoints with cross-repository dependency edges;
@@ -90,8 +89,9 @@ accepted work intact and blocks only its dependency chain.
 ## Snapshot Validity
 
 Validation and review evidence applies only to the exact source it examined.
-Material edits, changed bases, new commits, or changed supplemental evidence
-invalidate affected coverage.
+Material edits, changed bases, or changed supplemental evidence invalidate
+affected coverage. A new commit requires an applicability assessment; unchanged
+behavior and inputs can retain prior checks with a documented reason.
 
 Do not reuse prior-session evidence unless its source fingerprint and results
 are reconstructable. Mark uncertain evidence unresolved and rerun it before
@@ -101,7 +101,7 @@ acceptance.
 
 After compaction:
 
-1. Reload this skill and the phase-relevant reference.
+1. Recover only missing or changed phase-relevant instructions.
 2. Verify the capsule against the plan hash, repository status, accepted
    commits, and current source.
 3. Reconstruct checkpoint and validation state from reliable evidence.

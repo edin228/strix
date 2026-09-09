@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Oklch"
+  short_description: "Evaluate OKLCH colors, contrast, and gamut"
+  default_prompt: "Use $strix-oklch to evaluate OKLCH colors, contrast, and gamut."

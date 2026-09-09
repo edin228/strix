@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Retrospective"
+  short_description: "Reflect on completed work using session evidence"
+  default_prompt: "Use $strix-retrospective to reflect on completed work using session evidence."

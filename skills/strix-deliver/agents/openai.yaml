@@ -1,0 +1,4 @@
+interface:
+  display_name: "Strix Deliver"
+  short_description: "Deliver a change through local completion"
+  default_prompt: "Use $strix-deliver to deliver a change through local completion."

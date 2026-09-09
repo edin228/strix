@@ -46,8 +46,9 @@ project's `AGENTS.md` files.
 - Ground plans and reviews in current source.
 - Prefer vertical delivery slices and risk-cohesive execution checkpoints.
 - Give each checkpoint exactly one owning Git repository.
-- Separate plan authoring, independent plan review, user approval, and
-  implementation.
+- Distinguish plan authoring, source-verified readiness, any due independent
+  review, user approval, and implementation. Do not add automatic checkpoint
+  review or duplicate closeout reviews.
 - Scale validation and review to the behavior's realistic risk.
 - Never infer authority to push, merge, deploy, access production, delete
   branches, or perform destructive cleanup.
