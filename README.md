@@ -13,13 +13,16 @@ and authorization. The Sentry and OKLCH skills are optional adapters.
 For a resolved change, use `strix-deliver`. Bounded low-risk work uses a short
 scope and acceptance note. Larger or riskier work uses a source-verified plan
 and `strix-implement`, with focused checks during implementation and one
-combined review at closeout. Independent plan review is available on request,
+combined review at closeout. Planned implementation includes one simplification
+pass that preserves behavior before independent review. Independent plan review
+is available on request,
 when project-required, or before a concrete irreversible or costly design risk.
 Readiness and user approval remain separate.
 
 ```text
 resolved request → source verification and proportionate planning
                  → authorized implementation + focused checks
+                 → planned-work simplification
                  → combined closeout review + verified repairs
                  → required live proof → local result
 
@@ -54,7 +57,7 @@ fallbacks rather than requiring unavailable private helpers.
 | [`strix-retrospective`](skills/strix-retrospective/SKILL.md) | Reflect on completed work using session evidence |
 | [`strix-sentry-triage`](skills/strix-sentry-triage/SKILL.md) | Triage Sentry errors against current source |
 | [`strix-ship`](skills/strix-ship/SKILL.md) | Ship reviewed changes through protected merge |
-| [`strix-trim-complexity`](skills/strix-trim-complexity/SKILL.md) | Find behavior-preserving simplifications |
+| [`strix-trim-complexity`](skills/strix-trim-complexity/SKILL.md) | Review or apply behavior-preserving simplifications |
 | [`strix-ui`](skills/strix-ui/SKILL.md) | Improve interfaces using project conventions |
 | [`strix-unslop`](skills/strix-unslop/SKILL.md) | Edit writing for plain and natural language |
 | [`strix-verify-web`](skills/strix-verify-web/SKILL.md) | Verify web behavior with focused live evidence |
@@ -64,6 +67,10 @@ An ordinary review or investigation is read-only by default. A combined
 "bug hunt and branch review" requests one localized review-and-repair pass
 unless explicitly read-only. Local commits follow user and project authority.
 AI findings require source verification; deterministic checks remain authoritative.
+When delegation is available and authorized, workers investigate, implement, and
+test while the resident accepts evidence and owns commits. Keep one writer per
+checkout and a separate independent reviewer. Models and effort are project choices.
+Requested stage handoffs preserve scope, authority, and still-valid evidence.
 See [the port coverage](docs/port-coverage.md) for retained boundaries and
 [adoption examples](docs/adoption-examples.md) for choosing a subset.
 
@@ -136,6 +143,8 @@ An adopting agent should resolve these project-owned values:
 | Authority | Commit, push, merge, deployment, production, and destructive-action rules |
 | Review provider | Whether project source may be processed by the configured model provider |
 | Reviewer | Approved model/reasoning or permission to use Codex's service default |
+| Delegation | Permitted workers, supported tools, model/effort preferences, and exclusive ownership |
+| Continuation | Handoff location, requested stage boundaries, and optional context-warning policy |
 | Current documentation | Whether reviewer web search is allowed; it is off by default |
 | Runtime | Installed skill paths and the command used to launch the review engine |
 

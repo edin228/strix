@@ -21,6 +21,12 @@ source verification establishes readiness by default; an independent plan review
 is due when requested, project-required, or justified by the early-review rule.
 A readiness verdict never supplies user approval.
 
+For strix-implement closeout, complete one bounded behavior-preserving
+simplification pass before independent review. Retain valid prior work across
+handoff and do not restart discovery after repairs. Ordinary checkpoints and
+lightweight delivery do not acquire an automatic trim stage. Keep the trim author
+separate from the fresh independent reviewer.
+
 ## Choose one mechanism
 
 Use one permitted read-only source-capable reviewer for integrated work. Include
@@ -55,7 +61,10 @@ do not hardcode a preferred model into portable workflow policy.
 
 ## Repairs and evidence
 
-Verify each finding's executable trigger, impact, and source owner. Reject
+Verify each finding's executable trigger, impact, and source owner. In delegated
+work, the repair worker supplies source proof and affected checks; the resident
+accepts that evidence and actual returned state without duplicating unchanged
+investigation. Preserve exclusive writes and independent reviewers. Reject
 false positives with source evidence. Recheck the repair, direct interactions,
 and affected deterministic tests. A new or materially changed safety boundary
 requires a focused independent recheck, as does an explicit re-review request.

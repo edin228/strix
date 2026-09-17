@@ -72,6 +72,15 @@ tracing. Use:
 For each finding provide `path:line`, trigger, impact, evidence, and the
 smallest safe fix. Distinguish confirmed bugs from unverified hypotheses.
 
+## Delegated repairs
+
+During delegated implementation, assign source verification, localized repairs,
+and affected checks to the implementation worker. Prefer the simplification
+author for findings caused by its cuts. The resident accepts evidence and commits
+only under existing authority after exclusive writes are yielded. Do not repeat
+supported investigation merely to accept it. Preserve read-only reviewers and
+use safe worker transfer when context or availability requires replacement.
+
 ## Repair With Explicit Authority
 
 In `investigate-and-fix` mode:

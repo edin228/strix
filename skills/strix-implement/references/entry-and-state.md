@@ -62,6 +62,10 @@ When context pressure rises, record:
 - blocker or missing authority; and
 - one exact next safe action.
 
+Use [continuation.md](continuation.md) for requested stage transfers and routine
+plan repair. Record active writer ownership and pending trim, review, browser,
+and safety evidence.
+
 The capsule is an execution cursor, not a stopping reason. Consume it by
 continuing work after compaction.
 
@@ -77,7 +81,7 @@ repository from its parent.
 Before every authorized commit:
 
 - inspect status and complete checkpoint diff;
-- confirm the plan fingerprint;
+- confirm the current plan fingerprint and explain authorized in-scope changes;
 - stage explicit checkpoint-owned paths only;
 - preserve unrelated changes; and
 - confirm a due slice gate already passed.

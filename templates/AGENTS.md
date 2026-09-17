@@ -95,6 +95,20 @@ Recheck affected behavior after repairs and independently recheck materially
 changed safety boundaries. Do not schedule automatic checkpoint autoreview.
 Low-risk work normally needs focused checks and resident inspection.
 
+## Delegation and handoffs
+
+State whether delegation is permitted and any worker model, effort, tool, and
+source-data constraints. Keep one writer per checkout. Workers may investigate,
+implement, and test; the resident accepts evidence and owns authorized commits.
+Keep independent review separate from implementation and simplification authors.
+Use one bounded simplification pass before planned implementation closeout review,
+not at every checkpoint. Browser proof has an exclusive runtime and browser owner.
+
+Name the handoff location and any context-warning policy. Preserve existing task
+authority and valid evidence across transfers. Routine in-scope plan corrections
+do not need renewed approval; changes to the approved contract do. Record pending
+review and verification when the user requests an implementation-only stop.
+
 ## Operations
 
 State the rules for production access, deployments, databases, migrations,

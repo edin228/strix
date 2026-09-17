@@ -124,3 +124,28 @@ action, not independent preparation.
 Sentry triage needs an available approved integration and explicit scan scope.
 OKLCH work uses the project's contrast standard, browser targets, and theme
 conventions. Neither adapter is required for core delivery.
+
+## Delegation and continuation
+
+When delegation is permitted, name any approved worker models, supported reasoning
+settings, tool access, and data restrictions. The resident keeps the user's chosen
+configuration. Select worker effort for complexity and failure consequences;
+model preferences are not measured cost or quality guarantees.
+
+Implementation workers own source investigation, changes, debugging, and focused
+checks. The resident owns acceptance and authorized staging and commits. Use one
+writer per checkout, confirm ownership before replacement, and inspect returned
+state. Reuse reconstructable passing evidence on unchanged inputs. Keep independent
+review separate from implementation and simplification authorship.
+
+Planned implementation performs one bounded simplification pass before independent
+closeout review. Lightweight work and ordinary checkpoints do not acquire that
+extra stage. Use a dedicated browser owner for required live proof after repairs,
+with exclusive runtime and fixture control. Missing tools block dependent work;
+direct execution remains available under the same authority and evidence rules.
+
+Name a handoff location and context-warning policy if the project needs them.
+Routine source-backed plan corrections preserve approved intent and existing
+authority. A changed hash or mixed baseline alone does not require renewed approval.
+Requested stage boundaries retain pending trim, review, browser, and safety gates.
+A handoff cannot grant publication, production, or cleanup authority.

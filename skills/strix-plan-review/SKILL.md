@@ -15,13 +15,20 @@ Resolve the plan path and one mode:
 - `review-only`: inspect and report without editing; default for review, audit,
   check, grade, or verdict requests;
 - `repair`: make targeted plan edits, then audit the revised plan; require an
-  explicit request to fix, patch, repair, or rewrite; or
+  explicit repair request or existing in-scope delivery authority; or
 - `structural-only`: assess plan structure without source freshness; use only
   when the user explicitly limits the review.
 
+A standalone audit remains read-only. Existing implementation authority permits
+routine in-scope plan repairs across handoff; an explicitly read-only reviewer
+returns findings to the owner. A changed document hash or mixed baseline commit
+alone does not invalidate approval. Recheck only decisions whose evidence changed.
+
 Use a user-supplied path. Otherwise inspect the project-declared plan
 directory, branch-related plan names, and established plan locations. Ask only
-when multiple plausible plans remain.
+when multiple plausible plans remain. Resolve repository-relative paths from
+the selected Git root; do not switch from a worktree to another checkout
+to read its plan or instructions.
 
 ## Load Authority and Intent
 

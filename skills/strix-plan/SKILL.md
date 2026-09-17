@@ -51,6 +51,11 @@ migrations, configuration, and prior plans needed to:
 - derive realistic tests, edge cases, and validation commands; and
 - expose stale assumptions and cross-repository dependencies.
 
+Trace consequential data assumptions through actual producers and consumers,
+including filtering, pagination, completeness, authorization, and caching.
+Types, endpoint names, and mocked responses alone do not prove those contracts.
+Put any necessary focused runtime check before dependent implementation.
+
 Keep this phase read-only for product source. Do not implement, generate
 migrations, create feature branches, or alter configuration.
 
@@ -81,6 +86,15 @@ migrations, runtime side effects, background dispatch, security boundaries,
 and UI when a safe intermediate state exists. Explain why any large atomic
 transition cannot be divided safely.
 
+Keep agent counts, model choices, and scheduling out of the plan. They are
+runtime choices, not product decisions or approval criteria. Checkpoint ownership
+and order may evolve from source evidence while preserving the approved outcome.
+
+Distinguish local implementation dependencies from external rollout gates. Prove
+same-repository dependencies locally; do not require publication or deployment
+merely to consume earlier unmerged code. An external gate must name the behavior
+that local checks cannot prove, required evidence, and its separate authority.
+
 Include rollout, compatibility, recovery, and integration gates when material.
 Do not hide unresolved choices behind phrases such as “if needed” or “use X if
 possible.” Inspect and choose, or name the unresolved decision.
@@ -100,6 +114,16 @@ Before writing the final draft, verify:
 
 Mark source readiness, any due independent review, and approval status
 separately. Plan authorship alone does not authorize implementation.
+
+## Maintain an authorized plan
+
+Treat the plan as a working record of intent. Record its baseline or snapshot,
+using a separate plan-only commit only when project policy requires it. Existing
+mixed commits are valid; do not rewrite history to manufacture a seal. Routine
+source-backed corrections to paths, commands, validation, or checkpoint layout
+need no renewed approval within an already authorized outcome. Recheck affected
+decisions and preserve acceptance. Resolve changes to behavior, architecture,
+data treatment, safety boundaries, or external authority before implementation.
 
 ## Hand Off
 

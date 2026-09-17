@@ -86,6 +86,15 @@ Use `P0` for catastrophic or actively exploitable failures, `P1` for serious
 common failures, `P2` for material limited-path defects, and `P3` for
 nonblocking observations.
 
+## Delegated repairs
+
+During delegated implementation, assign source verification, localized repairs,
+and affected checks to the implementation worker. Prefer the simplification
+author for findings caused by its cuts. The resident accepts evidence and commits
+only under existing authority after exclusive writes are yielded. Do not repeat
+supported investigation merely to accept it. Preserve read-only reviewers and
+use safe worker transfer when context or availability requires replacement.
+
 ## Repair Only With Authority
 
 In a fix mode, apply the smallest correction at the owning boundary. Add a
@@ -112,6 +121,14 @@ full review for each fix. Incomplete or engine-failed review is not clean.
 
 Do not commit, amend, push, merge, deploy, delete branches, or rewrite history
 unless separately authorized.
+
+For implementation closeout, assess browser applicability, named scenarios, and
+observable outcomes from source and deterministic evidence. Return that assessment
+for a separate browser owner after repairs settle; code review does not itself
+require a live drive. Inspect captured artifacts when browser outcomes are ambiguous.
+A fresh independent review resident may perform the requested combined review
+directly, without adding another reviewer for the same objective. An implementation
+or simplification author cannot supply that independent review.
 
 ## Report
 
