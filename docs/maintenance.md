@@ -68,3 +68,17 @@ The old routing-policy prose assertions were removed with their superseded
 checkpoint-budget policy. Executable runner, lens loading, snapshot isolation,
 stage-limit, schema, and usage checks remain in the unit suite. Validate workflow
 decisions through scenario review rather than matching replacement sentences.
+
+## September 17 refresh
+
+The follow-up port updates implementation ownership, plan maintenance, stage
+handoffs, simplification, and browser delegation. It retains the 24-skill
+collection and existing autoreview engine. Core workflows choose models through
+the adopting project and available tools; source-project model preferences and
+runtime commands are not portable invariants.
+
+For future ports, compare behavior across entrypoints and their policy references.
+Check that independent skill installation still has a usable fallback and that
+worker assignments preserve the same authorization as direct execution. Exercise
+stale-plan continuation, interrupted writes, standalone versus closeout trimming,
+review repairs, and browser failures during scenario review.

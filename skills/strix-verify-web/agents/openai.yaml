@@ -1,4 +1,4 @@
 interface:
   display_name: "Strix Verify Web"
   short_description: "Verify web behavior with focused live evidence"
-  default_prompt: "Use $strix-verify-web to verify web behavior with focused live evidence."
+  default_prompt: "Use $strix-verify-web to verify the named web scenarios with focused live evidence and exclusive browser ownership."

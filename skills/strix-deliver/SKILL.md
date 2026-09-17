@@ -24,9 +24,17 @@ irreversible action or expensive dependent design decision.
 
 Readiness is not approval. An explicit request to implement a resolved outcome
 can authorize its in-scope plan unless project policy requires a separate plan
-approval. Bind that authority to the exact plan version. Resolve material new
+approval. Record the authorized outcome and current plan baseline. Routine
+source-backed plan or handoff repairs preserve that authority; recheck affected
+decisions without restarting unaffected planning or review. Resolve material new
 choices before proceeding. Seal the plan in a separate commit only when the
 project requires it and local commits are authorized.
+
+Continue through local completion in the current workspace unless the user
+requests a stage boundary. Preserve authorization on transfer and name pending
+review, simplification, browser, and safety evidence. Use the continuation
+reference in strix-implement when installed, or a concise handoff with workspace
+identity, evidence, remaining work, and the next safe action.
 
 Execute dependency-ready work with focused checks. For a substantial approved
 plan use strix-implement when installed, otherwise retain one repository owner

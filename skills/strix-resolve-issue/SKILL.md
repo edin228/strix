@@ -33,6 +33,11 @@ If only part of a requested repair bundle is actionable, resolve its membership
 with the user before editing. For authorized repairs use strix-deliver when
 installed or the project's planning and implementation procedure. Preserve
 per-issue acceptance and regression coverage through combined closeout review.
+Continue authorized repairs through local validation and review unless the user
+sets a stage boundary. A transfer preserves the exact issue set and existing
+authority; record pending gates rather than claiming complete local resolution.
+Recover routine plan and handoff metadata from current source without replaying
+completed investigation or requiring a new plan-only commit.
 Security and ownership repairs must prove supported identities and entry paths.
 
 Report each disposition and verified local outcome, exact source state, checks,

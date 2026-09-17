@@ -15,6 +15,43 @@ assessment of changed behavior after repairs settle. Name required scenarios;
 a full feature-map audit is reserved for an explicit audit or proven broad drift.
 Deterministic coverage can support a not-required decision without a waiver.
 
+## Execution ownership
+
+When delegation is available and authorized, assign a dedicated browser worker
+with project-approved model and effort; honor direct execution and user overrides.
+An assigned worker executes directly without spawning agents. A standalone
+diagnostic request does not add a code-review prerequisite.
+
+At implementation closeout, the source-capable code reviewer assesses applicability,
+named scenarios, and observable outcomes from source. When a structured review
+engine cannot return that assessment, the resident supplies it from source and
+deterministic evidence without adding a full review. Pass that assessment, selected
+root and candidate snapshot, fixture constraints, relevant feature recipes, and
+retained artifacts to the browser owner after repairs settle. Feature recipes
+supply navigation and prerequisites, not mandatory unrelated smoke checks.
+
+Confirm access to browser tools, the selected runtime, and evidence storage
+before delegation. Missing capabilities are a blocker; do not silently switch
+to a different runtime or reviewer. Assign exclusive browser and verification
+runtime control. Do not allow another actor to edit source, mutate fixtures or
+the database, or drive the browser while proof is being collected.
+
+The worker may operate the prescribed runtime and create safe evidence. It must
+not edit application source, stage, commit, spawn agents, publish, or perform
+lifecycle actions beyond authorized launch and cleanup. UI writes still need
+fixture and action authority. Return tested source, tab and runtime identities,
+scenario outcomes, artifact references, cleanup status, and blockers.
+
+The resident checks evidence completeness and routes failures to the repair owner.
+For ambiguous outcomes, have the code reviewer inspect captured evidence before
+changing expectations. If that reviewer was an ephemeral engine invocation, use
+a focused source-capable assessment of the disputed outcome, not another complete
+review. Yield browser/runtime ownership before repairs, then rerun
+only invalidated scenarios. Never convert a failed or blocked scenario into a
+pass through a model verdict or repeated unexplained retries.
+
+## Drive and evidence
+
 Verify the selected runtime's root, source version, owned listener, health,
 fixture readiness, and actual browser origin before interaction. Check secure
 context when the scenario needs it. Use the declared credentials source without

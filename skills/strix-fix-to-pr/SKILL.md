@@ -31,6 +31,11 @@ needs no formal plan. Standard-risk work needs source-verified planning. Use
 rendered proof when a visual claim cannot be established by deterministic
 checks. Sanitize captures; label an unavailable baseline honestly.
 
+Continue through publication unless the user requests a staged handoff. Preserve
+the scoped PR authority on transfer, record pending local and publication gates,
+and resume from the first incomplete step. Routine in-scope plan maintenance
+does not require another approval or a new plan-only commit.
+
 Commit only the accepted repair and publish the exact reviewed tip through
 strix-publish-pr when installed, or the project's protected PR procedure.
 Describe the trigger, resulting behavior, validation, and material limitations.

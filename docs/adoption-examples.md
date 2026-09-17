@@ -45,3 +45,22 @@ Install strix-branch-review, strix-bug-hunt, or strix-trim-complexity as needed.
 A request for findings only leaves source and Git state unchanged. A combined
 bug-hunt-and-branch-review request authorizes localized repairs unless explicitly
 read-only; commits still follow project policy. No review request implies a push.
+
+## Planned delivery with workers and a stage handoff
+
+A project permits delegated implementation but leaves local commits disabled.
+An approved parser plan names a file that has moved. Correct the path from current
+source and record the reason, then assign the checkpoint with explicit ownership.
+Accept its tested diff without committing. If the worker becomes unavailable,
+confirm it cannot resume writes before transferring the preserved work.
+
+At a requested implementation-only stop, record the exact dirty snapshot, checks,
+and pending simplification and review. The next resident inherits that authority.
+It completes one trim-and-fix pass, obtains an independent review of the resulting
+diff, and routes confirmed findings to the repair owner. A standalone request to
+review complexity would instead leave source unchanged.
+
+For a web flow, the reviewer names the required browser states. A dedicated owner
+executes them once source and fixtures are stable. If a scenario fails, retain the
+evidence, yield runtime ownership for repair, and repeat only invalidated scenarios.
+Do not weaken acceptance or label blocked proof as passing.

@@ -6,7 +6,10 @@ description: Run isolated, structured, risk-proportional AI code reviews for loc
 # Strix Autoreview
 
 Run a read-only advisory review in an isolated Git snapshot. Verify every
-finding against current source before changing or reporting code.
+finding against current source before changing or reporting code. During delegated
+implementation, the repair worker supplies source verification and affected checks;
+the resident accepts that evidence and commits only under existing authority after
+writes are yielded. Keep the review helper independent and reuse still-valid proof.
 
 Contract version: `1.0.0`
 
